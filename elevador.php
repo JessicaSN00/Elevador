@@ -11,8 +11,6 @@ class Elevador
 
     public function firstStop($initial_state, $users, $floor_target)
     {
-        //Elevator initial state echo
-        echo "El elevador se encuentra en el piso #".$initial_state." <br>";
         //Checking for a same user state
         foreach($users as $key => $user) {
             if($initial_state == $key) {
@@ -20,7 +18,7 @@ class Elevador
                 array_push($this -> order_users, $user);
                 $this -> founded_initial = 1; 
                 return $this -> order_users;
-                print_r ($this -> order_users);
+                //print_r ($this -> order_users);
             } 
         }    
         //Checking for the closest user to pick
@@ -40,7 +38,7 @@ class Elevador
             //Moving elevator to nearest user
             if($user_key  > $initial_state) {
                 while($initial_state < $user_key) {
-                    echo ("El elevador ha subido al piso ".($initial_state+1)."<br>");
+                    //echo ("El elevador ha subido al piso ".($initial_state+1)."<br>");
                     $initial_state++;
                 }
                 array_push($this -> actions, $initial_state);

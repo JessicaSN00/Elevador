@@ -10,6 +10,20 @@ $first_position = array_search($elevator -> order_users[0], $users);
 $first_destination = $floor_target[$first_position];
 $position = $first_position;
 
+echo ("Get results form the hotel<br>");
+printf("POST: "); print_r($_POST); printf("<br/>");
+
+for($x=1; $x <= (count($_POST)/2); $x++) {
+    $users_floor = [$_POST['actual_floor_'.$x] => $_POST['user_'.$x]];
+    print_r($users_floor[5]);
+}
+
+echo $_POST['username']."<br>";
+print_r($user_floor."<br>");
+
+//Elevator initial state echo
+echo "El elevador se encuentra en el piso #".$initial_state." <br>";
+
 //Elevator arrive to the first user
 foreach($elevator->order_users as $key => $user) {
     if($elevator -> actions[$key] == $initial_state) {
@@ -35,7 +49,7 @@ while($first_destination < $position) {
     $position = $elevator -> pos;
 }
 //Results
-echo ("<b>Recorrido final de acuerdo a usuarios:<br>");
+echo ("<b>Recorrido final de acuerdo a usuarios:<br></b>");
 foreach($elevator -> order_users as $route => $user) {
     print_r("--".$elevator -> order_users[$route]); 
 }

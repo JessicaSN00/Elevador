@@ -65,7 +65,7 @@ class Elevador
                         echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador");
                         $floor_target[$key] = null;
                     } else {
-                    echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
+                    //echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
                     array_push($this -> order_users, $users[$key]);
                     }
                 }
@@ -73,7 +73,7 @@ class Elevador
                     echo ("El usuario  ".$users[$key]." bajo en el piso ".$i."<br>");
                 }
             }
-            echo($i."<br>");
+            //echo($i."<br>");
             $this -> pos = $i;
         }
         $this -> destination = min($floor_target);
@@ -85,7 +85,7 @@ class Elevador
         //Elevator go down
         $this -> pos = $initial_state;
         for($j=$position; $j >= $first_destination; $j--) {
-            echo ($j."<br>");
+            //echo ($j."<br>");
             //Floors in maintenance
             if($j == 2 || $j == 4){
                 echo("Mantenimiento! Piso ".$j."<br>");

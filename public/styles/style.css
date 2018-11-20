@@ -1,0 +1,88 @@
+body {
+    margin:0;
+}
+body, #body-background {
+    background-image: linear-gradient(to bottom right, #000000, #5c5c5c);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin: 50px 0 50px 0;
+
+}
+
+.elevator-form {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+    background-image: url(../images/pattern4.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 50px;
+}
+.elevator-form__input {
+    width: 60%;
+    margin-left: 20%;
+}
+.field-wrapper__input {
+    width: 100%;
+    margin-left: 10%;
+}
+input {
+    text-align: center;
+    padding: 15px 0px 15px 0px;
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #000000b2;
+    color: #fff;
+}
+::placeholder{
+    color: #fff;
+    font-size: 18px;
+}
+.form-button {
+    margin-top: 30px;
+    background-color: #811d1bc5;
+    width: 60%;
+    color:#fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-bottom: 40px;
+}
+
+.elevator{
+    width: 28%;
+    margin-left: 36%;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: auto;
+    color: #ffff;
+    font-weight: 500;
+    background-image: url(../images/pattern3.jpg);
+    background-size: cover;
+    padding: 10px;
+}
+.grid-container__items {
+    border: 10px;
+    padding: 30px;
+    font-size: 30px;
+    text-align: center;
+    background-color: #811d1bb3;
+}
+.grid-container__items:hover {
+    background-color: #811d1b;
+    color: #fff;
+}
+.elevator__results, .p {
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+
+}

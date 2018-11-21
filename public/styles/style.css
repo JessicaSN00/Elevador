@@ -1,26 +1,28 @@
 body {
     margin:0;
 }
-body, #body-background {
-    background-image: linear-gradient(to bottom right, #000000, #5c5c5c);
+#body-background {
+    background-image: linear-gradient(to bottom right, #000000, #242424);
     background-repeat: no-repeat;
     background-size: cover;
 }
-
+#index-background {
+    background-image: linear-gradient(to bottom right, #000000, #242424);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
 h1 {
     text-align: center;
     color: #fff;
-    margin: 50px 0 50px 0;
-
+    margin: 50px 0 20px 0;
 }
 
 .elevator-form {
     width: 50%;
     margin-left: 25%;
     margin-top: 5%;
-    background-image: url(../images/pattern4.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image: url(../images/white.png);
     padding: 50px;
 }
 .elevator-form__input {
@@ -37,7 +39,7 @@ input {
     margin-top: 30px;
     font-size: 20px;
     font-weight: bold;
-    background-color: #000000b2;
+    background-color: #1b1b22c9;
     color: #fff;
 }
 ::placeholder{
@@ -46,9 +48,9 @@ input {
 }
 .form-button {
     margin-top: 30px;
-    background-color: #811d1bc5;
+    background-color: #ebd1d1dc;
     width: 60%;
-    color:#fff;
+    color:#000;
     font-size: 20px;
     font-weight: bold;
     margin-left: 20%;
@@ -56,16 +58,17 @@ input {
 }
 
 .elevator{
-    width: 28%;
-    margin-left: 36%;
+    width: 100%;
 }
 .grid-container {
+    width: 28%;
+    margin-left: 36%;
     display: grid;
     grid-template-columns: auto;
     color: #ffff;
     font-weight: 500;
-    background-image: url(../images/pattern3.jpg);
-    background-size: cover;
+    background-image: url(../images/geo_purple.jpg);
+    background-repeat: repeat;
     padding: 10px;
 }
 .grid-container__items {
@@ -73,16 +76,22 @@ input {
     padding: 30px;
     font-size: 30px;
     text-align: center;
-    background-color: #811d1bb3;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 .grid-container__items:hover {
-    background-color: #811d1b;
+    background-color: #2e2d39;
     color: #fff;
 }
-.elevator__results, .p {
-    color: #fff;
-    font-size: 30px;
+.elevator__results {
+    width: 50%;
+    margin-left: 25%;
+    font-size: 20px;
+    color: #000;
     text-align: center;
-    width: 100%;
-
+    border-color: #000;
+    border-radius: 15px;
+    background-image: linear-gradient(to bottom right,#ae9e9e, #E2DCDC);
+}
+.results__text {
+    font-size: 30px;
 }

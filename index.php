@@ -9,13 +9,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="elevator.js"></script>
 </head>
-<body>
+<body id="index-background">
     <h1>Bienvenido al hotel.</h1>
     <div class="elevator-form">
         <!-- Form for all values needed in the elevator-->
         <form method="post" action="elevator.php">
             <input class="elevator-form__input" type="text" name="initial_state" placeholder="Piso inicial" required>
-            <input class="elevator-form__input" type="text" name="floor_maintenance" placeholder="Pisos en mantenimiento" required/>
+            <input class="elevator-form__input" type="text" name="floor_maintenance" placeholder="Piso en mantenimiento" pattern="((?=.*\d){1}" required/>
             <div class="field-wrapper">
                 <div class="field-wrapper__input">
                 <input type="text" value="<? $_GET['user_1']?>" name="actual_floor_1" placeholder="Piso Actual">

@@ -48,21 +48,17 @@ class Elevador
         }
     }
 
-    public function up($first_destination, $position, $users, $floor_target, $initial_state)
+    public function up($first_destination, $position, $users, $floor_target, $initial_state, $floor_maintenance)
     {
         //Elevator go up
         $this -> pos = $initial_state;
         for($i=$position; $i <= $first_destination; $i++) {
-            //Floors in maintenance
-            if($i == 2 || $i == 4){
-                echo("Mantenimiento! Piso ".$i."<br>");
-            }
             //Pick up nearest users
             foreach($floor_target as $key => $des) {
                 if($i == $key && $key != $initial_state && $des > $i) {
                     //Only in avilable floors
-                    if (($i == 2 || $i == 4) || ($des == 2 || $des == 4)) {
-                        echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador");
+                    if (($i == 2 || $i == 4) || ($des == $floor_maintenance)) {
+                        //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador");
                         $floor_target[$key] = null;
                     } else {
                     //echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
@@ -80,22 +76,18 @@ class Elevador
         return $this -> pos;
     }
     
-    public function down($first_destination, $position, $users, $floor_target, $initial_state)
+    public function down($first_destination, $position, $users, $floor_target, $initial_state, $floor_maintenance)
     {
         //Elevator go down
         $this -> pos = $initial_state;
         for($j=$position; $j >= $first_destination; $j--) {
             //echo ($j."<br>");
-            //Floors in maintenance
-            if($j == 2 || $j == 4){
-                echo("Mantenimiento! Piso ".$j."<br>");
-            }
             //Pick up nearest users
             foreach($floor_target as $key => $des) {
                 if($j == $key && $key != $initial_state && $des < $j) {
                     //Only avilable floors
-                    if (($j == 2 || $j == 4) || ($des == 2 || $des == 4)) {
-                        echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador<br>");
+                    if (($j == 2 || $j == 4) || ($des == $floor_maintenance)) {
+                        //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador<br>");
                         $floor_target[$key] = null;
                     } else {
                     echo ("El usuario ".$users[$key]." ha abordado en el piso ".$j." con destino: ".$des."<br>");

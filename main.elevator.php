@@ -57,22 +57,21 @@ class Elevador
             foreach($floor_target as $key => $des) {
                 if($i == $key && $key != $initial_state && $des > $i) {
                     //Only in avilable floors
-                    if (($i == 2 || $i == 4) || ($des == $floor_maintenance)) {
+                    if ($des == $floor_maintenance) {
                         //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador");
                         $floor_target[$key] = null;
                     } else {
-                    //echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
+                    echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
                     array_push($this -> order_users, $users[$key]);
                     }
                 }
-                if($i == $des && $des != $initial_state && $i != 2 && $i != 4) {
+                if($i == $des && $des != $initial_state && $i != $floor_maintenance) {
                     echo ("El usuario  ".$users[$key]." bajo en el piso ".$i."<br>");
                 }
             }
-            //echo($i."<br>");
             $this -> pos = $i;
         }
-        $this -> destination = min($floor_target);
+        $this -> destination = max($floor_target);
         return $this -> pos;
     }
     
@@ -86,7 +85,7 @@ class Elevador
             foreach($floor_target as $key => $des) {
                 if($j == $key && $key != $initial_state && $des < $j) {
                     //Only avilable floors
-                    if (($j == 2 || $j == 4) || ($des == $floor_maintenance)) {
+                    if ($des == $floor_maintenance) {
                         //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador<br>");
                         $floor_target[$key] = null;
                     } else {
@@ -94,13 +93,13 @@ class Elevador
                     array_push($this -> order_users, $users[$key]);
                     }
                 }
-                if($j == $des && $des == $initial_state && $j != 2 && $j != 4) {
+                if($j == $des && $des == $initial_state && $j != $floor_maintenance) {
                     echo ("El usuario  ".$users[$key]." bajo en el piso ".$j."<br>");
                 }
             }
             $this -> pos = $j;
         }
-        $this -> destination = max($floor_target);
+        $this -> destination = min($floor_target);
         return $this -> pos;
     }
 }

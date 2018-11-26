@@ -6,34 +6,26 @@ $floor_maintenance = $_POST['floor_maintenance'];
 //$users = [6 => "Juan", 5 => "Pedro", 3 => "Pancho", 1 => "Ramon"];
 //$floor_target = [6 => 1, 5 => 7, 3 => 1, 1 => 7];
 $users = [];
-$users1 = [];
-$users2 = [];
-
-$usuarios = [];
-
 $floor_target = [];
+
 printf("POST: "); print_r($_POST); printf("<br/>");
-for($x=1; $x <= count($_POST)/2-3; $x++) {
+for($x=1; $x <= count($_POST)/2-2; $x++) {
     $floor = $_POST['actual_floor_'.$x];
-    $user = $_POST['user_'.$x];
+    $usuario = $_POST['user_'.$x]; 
     $destiny = $_POST['floor_target_'.$x];
-    array_push($users, $floor);
-    array_push($users1, $user);
-    array_push($users2, $destiny);
-    //$fullarray=[$users[$x]][$user1[$x]];
+    $users[$floor] = $usuario;
+    $floor_target[$floor] =$destiny;
 }
-print("El resusltado es:");
-print_r($users1);
+
+print("<h1>El resusltado es:");
+print_r($floor_target);
+print("<br>Users<br>");
 print_r($users);
-print_r($users2);
-print("<br>");
-foreach($users as $key => $value){
-    array_push($usuarios, $users[$value]);
-}
-print_r ($usuarios);
+print("</h1><br>");
+
 printf("Floor Target<br>");
 for($x=1; $x <= (count($_POST)/2-3); $x++) {
-    array_push($floor_target, [$_POST['actual_floor_'.$x] => $_POST['floor_target_'.$x]]);
+    //array_push($floor_target, [$_POST['actual_floor_'.$x] => $_POST['floor_target_'.$x]]);
 }
 
 $elevator = new Elevador();
@@ -41,8 +33,9 @@ $elevator -> firstStop($initial_state, $users, $floor_target);
 $first_position = array_search($elevator -> order_users[0], $users);
 $first_destination = $floor_target[$first_position];
 $position = $first_position;
-$max_floor = 7;
-echo "MASSACAIJRISVJ".$max_floor;
+$max_floor = max($floor_target);
+$min_floor = min($floor_target);
+echo($max_floor);
 
 echo ("Get results form the hotel<br>");
 
@@ -87,7 +80,7 @@ echo ("Get results form the hotel<br>");
             print_r("Primer usuario en posición ".$first_position." con destino a piso ".$first_destination."<br>");
             //Elevator functions for the other users (up, down)
             while($first_destination > $position) {
-                for($i=$position; $i <= $first_destination; $i++) {
+                for($i=$position; $i <= $max_floor; $i++) {
                     flush(); 
                     ob_flush(); 
                     sleep(2);

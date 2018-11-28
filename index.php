@@ -29,7 +29,7 @@
     </div>
     <script type="text/javascript">
     $(document).ready(function(){
-        var maxField = 10; //Input fields increment limitation
+        var maxField = 3; //Input fields increment limitation
         var addButton = $('.add_button'); //Add button selector
         var wrapper = $('.field-wrapper'); //Input field wrapper
         var x = 1; //Initial field counter is 1

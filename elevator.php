@@ -3,9 +3,10 @@ include "main.elevator.php";
 
 $initial_state = $_POST['initial_state'];
 $floor_maintenance = $_POST['floor_maintenance'];
+//$users = [6 => "Juan", 5 => "Pedro", 3 => "Pancho", 1 => "Ramon"];
+//$floor_target = [6 => 1, 5 => 7, 3 => 1, 1 => 7];
 $users = [];
 $floor_target = [];
-
 printf("POST: "); print_r($_POST); printf("<br/>");
 for($x=1; $x <= count($_POST)/2-2; $x++) {
     $floor = $_POST['actual_floor_'.$x];
@@ -14,6 +15,11 @@ for($x=1; $x <= count($_POST)/2-2; $x++) {
     $users[$floor] = $usuario;
     $floor_target[$floor] =$destiny;
 }
+print("<h1>El resusltado es:");
+print_r($floor_target);
+print("<br>Users<br>");
+print_r($users);
+print("</h1><br>");
 
 $elevator = new Elevador();
 $elevator -> firstStop($initial_state, $users, $floor_target, $near_state);
@@ -57,7 +63,6 @@ echo ("Get results form the hotel<br>");
             foreach($elevator->order_users as $key => $user) {
                 if($elevator -> actions[$key] == $initial_state) {
                     echo ("El usuario ".$user." ha abordado al elevador. <br>");
-                    echo("Same user state ".$initial_state);
                 } else if ($elevator -> actions[$key] != $initial_state) {
                     echo ("El elevador ha recogido al usuario ".$user." <br>");
                 } else {
@@ -73,6 +78,7 @@ echo ("Get results form the hotel<br>");
                     flush(); 
                     ob_flush(); 
                     sleep(2);
+                    //echo($i."<br>");
                     echo('<style>
                     #floor-'.$i.' {
                         background-color: #2e2d39;
@@ -90,7 +96,6 @@ echo ("Get results form the hotel<br>");
                 $elevator -> up($first_destination, $position, $users, $floor_target, $initial_state, $pos, $floor_maintenance);
                 $first_destination = $elevator -> destination;
                 $position = $elevator -> pos;
-                echo($position."<br>");
             }
             while($first_destination < $position) {
                 $initial_state = $position;
@@ -98,6 +103,7 @@ echo ("Get results form the hotel<br>");
                     flush(); 
                     ob_flush(); 
                     sleep(2);
+                    //echo($j."<br>");
                     echo('<style>
                     #floor-'.$j.' {
                         background-color: rgba(0, 0, 0, 0.7);

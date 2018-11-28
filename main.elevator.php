@@ -23,6 +23,7 @@ class Elevador
         }    
         //Checking for the closest user to pick
         if($this -> founded_initial == 0) {
+            echo("Checking for the closest user to pick");
             foreach($users as $key => $user) {
                 $key = array_search($user, $users);
                 $difference = $initial_state - $key;
@@ -38,11 +39,16 @@ class Elevador
             //Moving elevator to nearest user
             if($user_key  > $initial_state) {
                 while($initial_state < $user_key) {
-                    //echo ("El elevador ha subido al piso ".($initial_state+1)."<br>");
+                    echo("Moving elevator to nearest user-------------".$user_key);
+                    echo ("El elevador ha subido al piso ".($initial_state+1)."<br>");
                     $initial_state++;
                 }
+                foreach($users as $key => $user) {
+                    if($user_key == $key) {
+                        array_push($this -> order_users, $user);
+                    }
+                }
                 array_push($this -> actions, $initial_state);
-                array_push($this -> order_users, $user);
                 return $initial_state+1;
             }
         }
@@ -61,18 +67,19 @@ class Elevador
                         //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador");
                         $floor_target[$key] = null;
                     } else {
+                        echo("LA cagué".$initial_state."<br>");
                     echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
                     array_push($this -> order_users, $users[$key]);
                     }
                 }
-                if($i == $des && $des != $initial_state && $i != $floor_maintenance) {
-                    echo ("El usuario  ".$users[$key]." bajo en el piso ".$i."<br>");
+                if($i == $des && $des != $initial_state && $i != $floor_maintenance && in_array($users[$key], $this -> order_users)) {
+                    echo ("El usuario  ".$users[$key]." bajo en el piso ".$i.".<br>");
                 }
             }
             $this -> pos = $i;
         }
-        $this -> destination = max($floor_target);
-        return $this -> pos;
+        
+        $this -> destination = min($floor_target);
     }
     
     public function down($first_destination, $position, $users, $floor_target, $initial_state, $floor_maintenance)
@@ -89,17 +96,16 @@ class Elevador
                         //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador<br>");
                         $floor_target[$key] = null;
                     } else {
-                    echo ("El usuario ".$users[$key]." ha abordado en el piso ".$j." con destino: ".$des."<br>");
-                    array_push($this -> order_users, $users[$key]);
+                        echo ("El usuario ".$users[$key]." ha abordado en el piso ".$j." con destino: ".$des."<br>");
+                        array_push($this -> order_users, $users[$key]);
                     }
                 }
-                if($j == $des && $des == $initial_state && $j != $floor_maintenance) {
-                    echo ("El usuario  ".$users[$key]." bajo en el piso ".$j."<br>");
+                if($j == $des && $des !== $initial_state && $j != $floor_maintenance && in_array($users[$key], $this -> order_users)) {
+                    echo ("El usuario  ".$users[$key]." bajo en el piso ".$j.".<br>");
                 }
             }
             $this -> pos = $j;
         }
-        $this -> destination = min($floor_target);
-        return $this -> pos;
+        $this -> destination = max($floor_target);
     }
 }

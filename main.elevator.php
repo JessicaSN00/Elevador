@@ -18,7 +18,6 @@ class Elevador
                 array_push($this -> order_users, $user);
                 $this -> founded_initial = 1; 
                 return $this -> order_users;
-                //print_r ($this -> order_users);
             } 
         }    
         //Checking for the closest user to pick
@@ -39,8 +38,6 @@ class Elevador
             //Moving elevator to nearest user
             if($user_key  > $initial_state) {
                 while($initial_state < $user_key) {
-                    echo("Moving elevator to nearest user-------------".$user_key);
-                    echo ("El elevador ha subido al piso ".($initial_state+1)."<br>");
                     $initial_state++;
                 }
                 foreach($users as $key => $user) {
@@ -64,10 +61,8 @@ class Elevador
                 if($i == $key && $key != $initial_state && $des > $i) {
                     //Only in avilable floors
                     if ($des == $floor_maintenance) {
-                        //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador");
                         $floor_target[$key] = null;
                     } else {
-                        echo("LA cagué".$initial_state."<br>");
                     echo ("El usuario ".$users[$key]." ha abordado en el piso ".$i." con destino: ".$des."<br>");
                     array_push($this -> order_users, $users[$key]);
                     }
@@ -87,13 +82,11 @@ class Elevador
         //Elevator go down
         $this -> pos = $initial_state;
         for($j=$position; $j >= $first_destination; $j--) {
-            //echo ($j."<br>");
             //Pick up nearest users
             foreach($floor_target as $key => $des) {
                 if($j == $key && $key != $initial_state && $des < $j) {
                     //Only avilable floors
                     if ($des == $floor_maintenance) {
-                        //echo ("Piso en mantenimiento ".$users[$key]." no puede tomar el elevador<br>");
                         $floor_target[$key] = null;
                     } else {
                         echo ("El usuario ".$users[$key]." ha abordado en el piso ".$j." con destino: ".$des."<br>");

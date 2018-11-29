@@ -3,11 +3,8 @@ include "main.elevator.php";
 
 $initial_state = $_POST['initial_state'];
 $floor_maintenance = $_POST['floor_maintenance'];
-//$users = [6 => "Juan", 5 => "Pedro", 3 => "Pancho", 1 => "Ramon"];
-//$floor_target = [6 => 1, 5 => 7, 3 => 1, 1 => 7];
 $users = [];
 $floor_target = [];
-printf("POST: "); print_r($_POST); printf("<br/>");
 for($x=1; $x <= count($_POST)/2-2; $x++) {
     $floor = $_POST['actual_floor_'.$x];
     $usuario = $_POST['user_'.$x]; 
@@ -15,11 +12,6 @@ for($x=1; $x <= count($_POST)/2-2; $x++) {
     $users[$floor] = $usuario;
     $floor_target[$floor] =$destiny;
 }
-print("<h1>El resusltado es:");
-print_r($floor_target);
-print("<br>Users<br>");
-print_r($users);
-print("</h1><br>");
 
 $elevator = new Elevador();
 $elevator -> firstStop($initial_state, $users, $floor_target, $near_state);
@@ -28,9 +20,6 @@ $first_destination = $floor_target[$first_position];
 $position = $first_position;
 $max_floor = max($floor_target);
 $min_floor = min($floor_target);
-
-echo ("Get results form the hotel<br>");
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,15 +59,14 @@ echo ("Get results form the hotel<br>");
                 }
             }
             print_r("Primer usuario en posición ".$first_position." con destino a piso ".$first_destination."<br>");
-            //Elevator functions for the other users (up, down)
 
+            //Elevator functions for the other users (up, down)
             while($first_destination > $position) {
                 $initial_state = $position;
                 for($i=$position; $i <= $first_destination; $i++) {
                     flush(); 
                     ob_flush(); 
                     sleep(2);
-                    //echo($i."<br>");
                     echo('<style>
                     #floor-'.$i.' {
                         background-color: #2e2d39;
@@ -99,11 +87,13 @@ echo ("Get results form the hotel<br>");
             }
             while($first_destination < $position) {
                 $initial_state = $position;
+                $elevator -> down($first_destination, $position, $users, $floor_target, $initial_state, $floor_maintenance);
+                $first_destination = $elevator -> destination;
+                $position = $elevator -> pos;
                 for($j=$position; $j >= $first_destination; $j--) {
                     flush(); 
                     ob_flush(); 
                     sleep(2);
-                    //echo($j."<br>");
                     echo('<style>
                     #floor-'.$j.' {
                         background-color: rgba(0, 0, 0, 0.7);
@@ -117,11 +107,12 @@ echo ("Get results form the hotel<br>");
                         }
                         </style>');
                     }
+                    if($j == $first_destination){
+                        ob_end_flush();
+                        $position = 0;
+                    }
+                    ini_set('max_execution_time', 80);
                 }
-                $elevator -> down($first_destination, $position, $users, $floor_target, $initial_state, $floor_maintenance);
-                $first_destination = $elevator -> destination;
-                $position = $elevator -> pos;
-                echo($position."<br>");
             }?>
             <p class="results__text">Resultados:
             <?php foreach($elevator -> order_users as $route => $user) {

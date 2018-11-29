@@ -5,6 +5,7 @@ body {
     background-image: linear-gradient(to bottom right, #000000, #242424);
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
 }
 #index-background {
     background-image: linear-gradient(to bottom right, #000000, #242424);
@@ -77,10 +78,6 @@ input {
     font-size: 30px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.4);
-}
-.grid-container__items:hover {
-    background-color: #2e2d39;
-    color: #fff;
 }
 .elevator__results {
     width: 50%;
